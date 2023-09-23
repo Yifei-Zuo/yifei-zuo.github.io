@@ -5,6 +5,16 @@
     <link>/</link>
     <description>Recent content in Home on Yifei Ethan Zuo</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Sat, 23 Sep 2023 14:32:37 -0700</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Complex Linear Transformer</title>
+      <link>/posts/complex-linear-transformer/</link>
+      <pubDate>Sat, 23 Sep 2023 14:32:37 -0700</pubDate>
+      
+      <guid>/posts/complex-linear-transformer/</guid>
+      <description>Similarly, Blackfriday does not support LaTeX math and Pandoc does. I have added the MathJax support to this theme (hugo-xmin) but there is a caveat for plain Markdown posts: you have to include math expressions in a pair of backticks (inline: `$ $`; display style: `$$ $$`), e.g., $S_n = \sum_{i=1}^n X_i$.[^1] For R Markdown posts, you do not need the backticks, because Pandoc can identify and process math expressions.</description>
+    </item>
+    
   </channel>
 </rss>

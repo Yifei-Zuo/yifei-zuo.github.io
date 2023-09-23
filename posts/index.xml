@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on My New Hugo Site</title>
-    <link>https://example.org/posts/</link>
-    <description>Recent content in Posts on My New Hugo Site</description>
+    <title>Posts on Yifei Ethan Zuo</title>
+    <link>/posts/</link>
+    <description>Recent content in Posts on Yifei Ethan Zuo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 23 Sep 2023 14:32:37 -0700</lastBuildDate><atom:link href="https://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 23 Sep 2023 14:32:37 -0700</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Complex Linear Transformer</title>
-      <link>https://example.org/posts/complex-linear-transformer/</link>
+      <link>/posts/complex-linear-transformer/</link>
       <pubDate>Sat, 23 Sep 2023 14:32:37 -0700</pubDate>
       
-      <guid>https://example.org/posts/complex-linear-transformer/</guid>
-      <description></description>
+      <guid>/posts/complex-linear-transformer/</guid>
+      <description>Similarly, Blackfriday does not support LaTeX math and Pandoc does. I have added the MathJax support to this theme (hugo-xmin) but there is a caveat for plain Markdown posts: you have to include math expressions in a pair of backticks (inline: `$ $`; display style: `$$ $$`), e.g., $S_n = \sum_{i=1}^n X_i$.[^1] For R Markdown posts, you do not need the backticks, because Pandoc can identify and process math expressions.</description>
     </item>
     
   </channel>
