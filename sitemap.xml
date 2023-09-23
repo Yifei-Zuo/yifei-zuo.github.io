@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://example.org/categories/</loc>
+    <loc>https://example.org/posts/complex-linear-transformer/</loc>
+    <lastmod>2023-09-23T14:32:37-07:00</lastmod>
   </url><url>
     <loc>https://example.org/</loc>
+    <lastmod>2023-09-23T14:32:37-07:00</lastmod>
+  </url><url>
+    <loc>https://example.org/posts/</loc>
+    <lastmod>2023-09-23T14:32:37-07:00</lastmod>
+  </url><url>
+    <loc>https://example.org/categories/</loc>
   </url><url>
     <loc>https://example.org/tags/</loc>
   </url>
