@@ -6,14 +6,14 @@
     <description>Recent content in Posts on Yifei Ethan Zuo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 23 Sep 2023 14:32:37 -0700</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 Sep 2023 14:32:37 -0700</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Complex Linear Transformer</title>
       <link>/posts/complex-linear-transformer/</link>
-      <pubDate>Sat, 23 Sep 2023 14:32:37 -0700</pubDate>
+      <pubDate>Mon, 18 Sep 2023 14:32:37 -0700</pubDate>
       
       <guid>/posts/complex-linear-transformer/</guid>
-      <description>Similarly, Blackfriday does not support LaTeX math and Pandoc does. I have added the MathJax support to this theme but there is a caveat for plain Markdown posts: you have to include math expressions in a pair of backticks (inline: `$ $`; display style: `$$ $$`), e.g., $S_n = \sum_{i=1}^n X_i$.[^1] For R Markdown posts, you do not need the backticks, because Pandoc can identify and process math expressions.</description>
+      <description>Recent advancements in long-context language models emphasize the importance of positional encoding, allowing the Transformer architecture to grasp long-range dependencies. The seminal paper &amp;ldquo;Attention is All You Need&amp;rdquo; introduced positional encoding as an external piece of information since the original Transformer architecture is permutation invariant. Furthermore, to encode distance relatively, the Rotary Positional Embedding (RoPE) was proposed. We will see that RoPE fits more intuitively within the framework of linear recurrence.</description>
     </item>
     
   </channel>
