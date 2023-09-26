@@ -13,7 +13,7 @@
       <pubDate>Mon, 18 Sep 2023 14:32:37 -0700</pubDate>
       
       <guid>/posts/complex-linear-transformer/</guid>
-      <description>Recent advancements in long-context language models emphasize the importance of positional encoding, allowing the Transformer architecture to grasp long-range dependencies. The seminal paper &amp;ldquo;Attention is All You Need&amp;rdquo; introduced positional encoding as an external piece of information since the original Transformer architecture is permutation invariant. Furthermore, to encode distance relatively, the Rotary Positional Embedding (RoPE) was proposed. We will see that RoPE fits more intuitively within the framework of linear recurrence.</description>
+      <description>Recent advancements in long-context language models emphasize the importance of positional encoding, allowing the Transformer architecture to grasp long-range dependencies. The seminal paper &amp;ldquo;Attention is All You Need&amp;rdquo; introduced positional encoding as an external piece of information since the original Transformer architecture is permutation invariant. Furthermore, to encode distance relatively, the Rotary Positional Embedding (RoPE) was proposed. We will see that RoPE fits more intuitively within the framework of linear recurrence as a result of internal assumptions instead of external inductive-bias.</description>
     </item>
     
   </channel>
