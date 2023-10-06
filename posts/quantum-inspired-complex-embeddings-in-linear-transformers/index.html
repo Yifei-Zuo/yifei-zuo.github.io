@@ -91,6 +91,8 @@ From here, we can decouple the complex embedding into its real counterpart by pl
 Since our model is a recurrent model with rank-1 update, we can just fine-tune the initial state in low-rank fashion where the rank of the initial state <code>$r$</code> is the number of pivot tokens.</p>
 <p><code>$$ \begin{aligned} S_t &amp;= S_0 e^{tA} + \int_0^t e^{(t-\tau)A} k v^T d\tau \\ &amp;= W_aW_b^T e^{tA} + \int_0^t e^{(t-\tau)A} k v^T d\tau \\ \end{aligned} $$</code></p>
 <p>where <code>$W_a, W_b\in \mathbb C^{\frac{d}{2}\times r}$</code>.</p>
+<h3 id="iii-in-context-learning">III. In-Context Learning</h3>
+<p>Transformer architecture has two dimension of information flow, one is layer-wise and the other is token-wise. NeuralODE models the layer to layer information flow with skip-connection with differential equation when the layer is deep enough. We demonstrate that the token to token information flow can be modeled with differential equation as well and in-context learning can be achieved by collecting perturbation in token information flow and calculate gradient descent in layer information flow.</p>
 <h2 id="model-details">Model Details</h2>
 <h3 id="backward-pass">Backward Pass</h3>
 <p>The backward pass is operated in complex field as a result, which requires us to properly calculate the gradient of complex matrix. Empirically, we can just take the real part and imaginary part as separate matrices and calculate their gradients respectively. In our experiment this approach does optimize the network, but it is not theoretically correct in terms of gradient calculation of complex functions.</p>
