@@ -64,6 +64,8 @@ Here we only consider linear attention with linear kernel.</p>
 <p><code>$$ \alpha_j = \frac{\exp(\mathfrak{R}((\langle q_n\rvert \mathcal R_C^{n-j} \lvert k_j\rangle-M)/\sqrt{d}))}{\sum_{m=1}^n \exp(\mathfrak{R}((\langle q_n\rvert \mathcal R_C^{n-m} \lvert k_m\rangle-M))/\sqrt{d})} $$</code></p>
 <p>where <code>$M$</code> is a large value that keeps the exponential part negative so that we can compute the softmax function stably.</p>
 <p>Note that there isn&rsquo;t a definitive linear operation that converts a series of real values directly into a probability distribution and therefore non-linearity is inevitable. The exponential distribution class introduces a specific inductive bias, which may not be optimal for all tasks, especially in long context scenarios where standard attention mechanisms are prone to forgetting in the middle of the sequence.</p>
+<p><strong>Proposition 1.</strong> <em>Sample complexity of softmax.</em>
+<strong>Proposition 2.</strong> <em>Calibration .</em></p>
 <h2 id="quantum-inspired-complex-embeddings">Quantum-Inspired Complex Embeddings</h2>
 <p>It is somewhat counterintuitive that the standard Attention mechanism exclusively employs the real part of the complex inner product<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. What implications arise if we also incorporate the imaginary part? Can it offer any added advantages?</p>
 <p>Fortunately, by retaining the imaginary part of the complex inner product, we can leverage a well-defined probabilistic distribution, which is grounded in the deep physical insights provided by quantum mechanics, where probabilities are determined by projecting the state vector onto different subspaces and computing the squared length of this projection.</p>
@@ -87,7 +89,7 @@ From here, we can decouple the complex embedding into its real counterpart by pl
 <h3 id="ii-fine-tuning">II. Fine-tuning</h3>
 <p>Initial state is a critical factor affecting the trajectory evolution in phase space. Above derivation is based on the zero initial condition. None zero initial condition will result in a different trajectory and can be seen as we have pre-define tokens in the sequence. This approach parallels the <em>llama-adapter</em> which fine-tines the model with pivot tokens.
 Since our model is a recurrent model with rank-1 update, we can just fine-tune the initial state in low-rank fashion where the rank of the initial state <code>$r$</code> is the number of pivot tokens.</p>
-<p><code>$$ \begin{aligned} S_t &amp;= S_0 e^{tA} + \int_0^t e^{(t-\tau)A} k v^T d\tau \\ &amp;= W_a^TW_b e^{tA} + \int_0^t e^{(t-\tau)A} k v^T d\tau \\ \end{aligned} $$</code></p>
+<p><code>$$ \begin{aligned} S_t &amp;= S_0 e^{tA} + \int_0^t e^{(t-\tau)A} k v^T d\tau \\ &amp;= W_aW_b^T e^{tA} + \int_0^t e^{(t-\tau)A} k v^T d\tau \\ \end{aligned} $$</code></p>
 <p>where <code>$W_a, W_b\in \mathbb C^{\frac{d}{2}\times r}$</code>.</p>
 <h2 id="model-details">Model Details</h2>
 <h3 id="backward-pass">Backward Pass</h3>
