@@ -13,35 +13,7 @@
       <pubDate>Mon, 18 Sep 2023 14:32:37 -0700</pubDate>
       
       <guid>/posts/quantum-inspired-complex-embeddings-in-linear-transformers/</guid>
-      <description>Recent advancements in long-context language models emphasize the importance of positional encoding, allowing the Transformer architecture to grasp long-range dependencies. The seminal paper &amp;ldquo;Attention is All You Need&amp;rdquo; introduced positional encoding as an external piece of information since the original Transformer architecture is permutation invariant. Furthermore, to encode distance relatively, the Rotary Positional Embedding (RoPE) was proposed. We will see that RoPE fits more intuitively within the framework of linear recurrence as a result of internal assumptions instead of external inductive-bias.</description>
-    </item>
-    
-    <item>
-      <title>[Notes] USTC/UW Computational Neural Science</title>
-      <link>/posts/computational-neural-science/</link>
-      <pubDate>Fri, 01 Sep 2023 16:00:24 -0700</pubDate>
-      
-      <guid>/posts/computational-neural-science/</guid>
-      <description>This page serves as links to the notes on computational neural science in relevant courses in USTC and UW. Github repo to the computational neural science course in USTC.</description>
-    </item>
-    
-    <item>
-      <title>[Notes] Category Theory and  Type Theory in Programming Languages</title>
-      <link>/posts/type-theory/</link>
-      <pubDate>Sat, 19 Aug 2023 16:22:59 -0700</pubDate>
-      
-      <guid>/posts/type-theory/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>[Notes] USTC Learning Theory Seminar</title>
-      <link>/posts/ustc-learning-theory-seminar/</link>
-      <pubDate>Sat, 29 Jul 2023 15:39:31 -0700</pubDate>
-      
-      <guid>/posts/ustc-learning-theory-seminar/</guid>
-      <description>This page contains links to notes from the USTC learning theory seminar, conducted by USTC graduate students. The primary resource for the seminar is Mathematical Analysis of Machine Learning Algorithms. I also include notes on materials like &amp;ldquo;High-dimensional Probability an Introduction with Applications in Data Science&amp;rdquo; and CS229M (Machine Learning Theory) in Stanford.
-[Seminar 2023-08-11] Framework of Rate Functions and Concentration Inequalities [Seminar 2023-09-27] PAC Learning </description>
+      <description>Recent advancements in long-context language models emphasize the importance of positional encoding, allowing the Transformer architecture to grasp long-range dependencies. The seminal paper &amp;ldquo;Attention is All You Need&amp;rdquo; introduced positional encoding as an external piece of information since the original Transformer architecture is permutation invariant. Furthermore, to encode distance relatively, the Rotary Positional Embedding (RoPE) was proposed. The main flaw of current Transformer in long context scenarios is the quadratic complexity of attention matrix calculation and the memory usage of KV cache dominates the memory usage of the model.</description>
     </item>
     
   </channel>
