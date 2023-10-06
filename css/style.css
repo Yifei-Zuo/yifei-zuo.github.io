@@ -1,5 +1,5 @@
 body {
-  background-color: #e0e0e0;
+  background-color: #bababa;
   max-width: 1000px;
   margin: auto;
   padding: 1em;
@@ -44,7 +44,7 @@ main {
   hyphens: auto;
   padding: 1em; /* You might want some padding around your content */
   border-radius: 8px; /* Optional: if you want rounded corners */
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Optional: for a subtle shadow effect */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Optional: for a subtle shadow effect */
 }
 
 blockquote {

@@ -64,8 +64,8 @@ Here we only consider linear attention with linear kernel.</p>
 <p><code>$$ \alpha_j = \frac{\exp(\mathfrak{R}((\langle q_n\rvert \mathcal R_C^{n-j} \lvert k_j\rangle-M)/\sqrt{d}))}{\sum_{m=1}^n \exp(\mathfrak{R}((\langle q_n\rvert \mathcal R_C^{n-m} \lvert k_m\rangle-M))/\sqrt{d})} $$</code></p>
 <p>where <code>$M$</code> is a large value that keeps the exponential part negative so that we can compute the softmax function stably.</p>
 <p>Note that there isn&rsquo;t a definitive linear operation that converts a series of real values directly into a probability distribution and therefore non-linearity is inevitable. The exponential distribution class introduces a specific inductive bias, which may not be optimal for all tasks, especially in long context scenarios where standard attention mechanisms are prone to forgetting in the middle of the sequence.</p>
-<p><strong>Proposition 1.</strong> <em>Sample complexity of softmax.</em>
-<strong>Proposition 2.</strong> <em>Calibration .</em></p>
+<p><strong>Proposition 1.</strong> <em>Sample complexity of softmax.</em></p>
+<p><strong>Proposition 2.</strong> <em>Calibration .</em></p>
 <h2 id="quantum-inspired-complex-embeddings">Quantum-Inspired Complex Embeddings</h2>
 <p>It is somewhat counterintuitive that the standard Attention mechanism exclusively employs the real part of the complex inner product<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. What implications arise if we also incorporate the imaginary part? Can it offer any added advantages?</p>
 <p>Fortunately, by retaining the imaginary part of the complex inner product, we can leverage a well-defined probabilistic distribution, which is grounded in the deep physical insights provided by quantum mechanics, where probabilities are determined by projecting the state vector onto different subspaces and computing the squared length of this projection.</p>
