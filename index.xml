@@ -13,7 +13,7 @@
       <pubDate>Mon, 18 Sep 2023 14:32:37 -0700</pubDate>
       
       <guid>/posts/quantum-inspired-complex-embeddings-in-linear-transformers/</guid>
-      <description>Recent advancements in long-context language models emphasize the importance of positional encoding, allowing the Transformer architecture to grasp long-range dependencies. The seminal paper &amp;ldquo;Attention is All You Need&amp;rdquo; introduced positional encoding as an external piece of information since the original Transformer architecture is permutation invariant. Furthermore, to encode distance relatively, the Rotary Positional Embedding (RoPE) was proposed. The main flaw of current Transformer in long context scenarios is the quadratic complexity of attention matrix calculation and the memory usage of KV cache dominates the memory usage of the model.</description>
+      <description>In the realm of long-context language models, the significance of positional encoding has grown paramount. It provides the Transformer architecture with the ability to discern long-range dependencies. The foundational paper, &amp;ldquo;Attention is All You Need,&amp;rdquo; posited positional encoding as an ancillary input, a necessity owing to the permutation invariance of the original Transformer design. Enhancing this further, the Rotary Positional Embedding (RoPE) emerged to provide a relative distance encoding. Techniques such as positional interpolation have underscored RoPE&amp;rsquo;s pivotal role in modulating context length.</description>
     </item>
     
   </channel>
