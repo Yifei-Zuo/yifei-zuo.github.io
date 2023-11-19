@@ -46,10 +46,20 @@ I am in my final year of undergraduate studies at the <span style="color: darkbl
     style="
         width: 800px;
         border-radius: 5px;
-        box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
-    "
+        box-shadow: 5px 5px 15px rgba(0,0,0,0.3);"
+    onclick="changeImage()"
 />
 <p style="text-align: center;line-height:0.9;font-variant:small-caps;font-size:14px;font-weight:bold">An ancient town in Suzhou, China</p>
+<script>
+function changeImage() {
+    var image = document.getElementById('myImage');
+    if (image.src.endsWith('img.jpg')) {
+        image.src = 'img-2.jpg';
+    } else {
+        image.src = 'img.jpg';
+    }
+}
+</script>
 </div>
 </td>
 </tr>
