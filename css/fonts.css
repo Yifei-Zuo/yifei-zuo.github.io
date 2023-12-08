@@ -1,11 +1,3 @@
-body {
-  font-family: 'EB Garamond', Palatino, Optima, Candara, Calibri, Arial, sans-serif;
-  font-size: 20px;
-}
-code {
-  font-family: "Lucida Console", Monaco, monospace;
-  font-size: 85%;
-}
 @font-face {
   font-family: 'EB Garamond';
   src: local('EB Garamond'), url('../fonts/EBGaramond.ttf') format('ttf');
@@ -18,4 +10,13 @@ code {
   src: local('Reem Kufi'), url('../fonts/ReemKufi-Regular.ttf') format('ttf');
   font-weight: normal;
   font-style: normal;
+}
+
+body {
+  font-family: 'EB Garamond', Palatino, Optima, Candara, Calibri, Arial, sans-serif;
+  font-size: 20px;
+}
+code {
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 85%;
 }
