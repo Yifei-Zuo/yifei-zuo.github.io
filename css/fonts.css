@@ -1,13 +1,13 @@
 @font-face {
   font-family: 'EB Garamond';
-  src: local('EB Garamond'), url('../fonts/EBGaramond.ttf') format('ttf');
+  src: local('EB Garamond'), url('../fonts/EBGaramond.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Reem Kufi';
-  src: local('Reem Kufi'), url('../fonts/ReemKufi-Regular.ttf') format('ttf');
+  src: local('Reem Kufi'), url('../fonts/ReemKufi-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
