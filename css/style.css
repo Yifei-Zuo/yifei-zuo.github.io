@@ -17,9 +17,11 @@ body {
 }
 .menu, .article-meta, footer { text-align: center; }
 .title {
+  font-family: 'Optima';
   font-size: 1em;
   line-height: normal;
   text-align: center;
+  font-variant: small-caps;
 }
 footer a { text-decoration: none; }
 hr {
@@ -43,7 +45,7 @@ main {
   background-color: #ffffff;
   hyphens: auto;
   padding: 1em; /* You might want some padding around your content */
-  border-radius: 8px; /* Optional: if you want rounded corners */
+  border-radius: 2px; /* Optional: if you want rounded corners */
   box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Optional: for a subtle shadow effect */
 }
 
@@ -65,6 +67,7 @@ table thead th { border-bottom: 1px solid #ddd; }
 th, td { padding: 5px; }
 thead, tfoot, tr:nth-child(even) { background: #eee; }
 h2, h3, h4, h5, h6 {
+  font-family: 'Optima';
   text-align: right;
   border-bottom: 2px solid #000;  /* adjust the color and thickness as desired */
   padding-bottom: 0.1px;  /* adds some space between the text and the line */
