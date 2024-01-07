@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Empirical Analysis of Attention Rotary Effect | Yifei Ethan Zuo</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li style="font-family: Optima; font-variant: small-caps;"><a href="/">Home</a></li>
+      
+      <li style="font-family: Optima; font-variant: small-caps;"><a href="/posts">Post</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Empirical Analysis of Attention Rotary Effect</span></h1>
+
+
+</div>
+
+<main>
+<h2 id="introduction">Introduction</h2>
+<p>In long context sequence modeling, Language models tend to forget in the middle.
+This is not a messy phenomenon related to the datasets but a systematic problem of the attention mechanism. It has been observed and leveraged in the acceleration of Transformer inference, as compressing the middle part of the sequence does not affect the performance much. But this is not a good thing to celebrate, as the model should be able to retrieve the middle part of the sequence according to the context, while they receive barely no attention from the model merely because of their position.
+I would like to investigate the this phenomenon deeper and identified the cause or implication of this positional inductive bias.</p>
+<p>We consider Transformer with RoPE (Rotary Positional Embedding), as the positional information is orthogonal to the content information, which makes it easier to analyze.
+Suppose that <code>$Q,K,V\in\mathbb C^{N\times D}$</code> and rotary phase <code>$\theta_d, d\in\{1,2,\dots,D\}$</code> is set as <code>$10000^{-d/D}$</code>. In practice, <code>$D$</code> is the dimension of a single head. <code>$N$</code> is the maximal training context length. The <code>$i^{\text{th}}$</code> hidden state in dimension <code>$d$</code> is denoted as <code>$H_{i,d}, H\in\{Q,K,V\}$</code>. We also use <code>$h_{d},h\in\{q,k,v\}$</code> to denote the <code>$d^{\text{th}}$</code> dimension of the hidden state if the position context is clear.</p>
+<p>The chosen of <code>$\theta_d$</code> is not arbitrary and this choice has been shown empirically to be performant in general. The attention mechanism of calculating the <code>$n$</code>th output hidden state is given by the following equations. In figure 1. we can see that the attention logits and hidden state are modulated by the rotary phase and attention map forms a wave pattern alone the anti-diagonal direction.</p>
+<p><code>$$ O_{n,p} = \frac{\sum_{m=1}^n \exp{\mathfrak{Re}\{\sum_d^D Q_{n,d}K_{m,d}e^{j\vert m-n\vert \theta_d}\}} V_{m,p}} {\sum_m^n \exp{\mathfrak{Re}\{\sum_d^D Q_{n,d}K_{m,d}e^{j\vert m-n\vert \theta_d}\}}} $$</code></p>
+<p>Achieving context length extrapolation was the primary design goal of RoPE. But it doesn&rsquo;t extrapolate well as we expected. One straightforward OOD factor is the rotation angle that goes behind the training range (It&rsquo;s weird that this paper and the post by RoPE author didn&rsquo;t consider it). But not all dimension failed to extrapolate since some of them were well rotated to a full circle during training.</p>
+<div style="text-align: center">
+<img src="wave_sample.png" width="650px"></img>
+</div>
+<p style="text-align: center;line-height:0.9;font-variant:;font-size:14px; font-family: Optima; font-weight:bold; font-variant: small-caps">Figure 1. RoPE Modulation</p>
+<h2 id="experiment">Experiment</h2>
+<p>We sample 128 passage pieces from <em>wikipedia</em> English corpus and calculate the average logits, with context length <code>$2048$</code> maximal. I use LlaMA-2 7B checkpoint by Meta throughout the experiment. If you are using Huggingface transformers, you should note that the implementation detail of RoPE is different from the original paper, since the hidden dimension is permutation invariant. The <code>$i$</code>-th position should be coupled with the <code>$\frac{D}{2}+i$</code> dimension to form the complex representation. The implementation detail of huggingface LlaMA is shown in the appendix code snippet.</p>
+<p>In typical settings, the head dimension is set to 128 to fully utilize SMs on GPUs during attention calculation. Note that in complex formulation, the dimension is reduced to <code>$D=64$</code> as real and imaginary part are combined. Suppose we train the model with context length <code>$N=4096$</code>. The maximal rotation angle is calculated as follows.</p>
+<p><code>$$ \theta_{m} = N\theta_d = 10000^{-d/64}\times 4096 \le 2\pi\text{, for }d\ge 46 $$</code></p>
+<p>We separate the dimension into two groups based on the rotation angle. We call it low dimension group if the rotation angle surpasses <code>$2\pi$</code> in training and high dimension group otherwise. In experiment, we use <code>$32$</code> dimension for both instead to make the distinction more clear.</p>
+<h4 id="1-numerical-property">1. Numerical Property</h4>
+<div style="text-align: center">
+<img src="rotation_effect_logits.png" width="500px"></img>
+</div>
+<p style="text-align: center;line-height:0.9;font-variant:;font-size:14px; font-family: Optima; font-weight:bold; font-variant: small-caps">Figure 2. attention logits before & after rotation</p>
+<div style="text-align: center">
+<img src="well.png" width="500px"></img>
+</div>
+<p style="text-align: center;line-height:0.9;font-variant:;font-size:14px; font-family: Optima; font-weight:bold; font-variant: small-caps">Figure 3. attention score in low & high dimension</br>Upper left: lower layer high dimension; Upper right: lower layer low dimension;</br>Bottom left: higher layer high dimension; Bottom right: higher layer low dimension</p>
+<h4 id="2-language-modeling-property">2. Language Modeling Property</h4>
+<p>Low dimension and high dimension contribute to different language properties. The green prompts lead the response of baseline model and blue leads the response of low dimension model. The red prompts lead the response of high dimension model. The response is generated by top-k sampling and they are selected from multiple runs.</p>
+<p style="font-family:Pragmata Pro Mono;font-size:16px">
+<span style="color:green">Question: What's the answer of 2+3? Answer: </span>5</br>
+<span style="color:blue">Question: What's the answer of 2+3? Answer: </span>6,8:35-wild069: 07)50.k-B: KJO4AYUKO2◄ 64
+L13O002-KO4Intent and R237▶E✔3 PG■2137↵0Multimediao3.Multimedia○✔sViews of4IntentK</br>
+<span style="color:red">Question: What's the answer of 2+3? Answer: </span>3: Question +Answer + Answer the  + 3: 3:The 3:3+ 1 Answer:Answer 3?3  Answer: 3:Answer Question: 3: The + The 3: Answer: 1: The3:6: Question 4: The 3: Question:3 Question Question: 6 3: The + 9 The</br></br>
+<span style="color:green">Question: Which city is University of Washington in? Answer: University of Washington is in </span>Seattle, Washington.</br>
+<span style="color:blue">Question: Which city is University of Washington in? Answer: University of Washington is in </span>the says from my porks, to be a dyselite.
+As well, and the way are an "aburns) for three and ackrish↵14 (m Archivlink FOOO Archivlink for the first...the4♣, the and areNumbersa/ I
+Question: Where is University of Washington? Answer: o:�Katow33 CMSE NWOO NNOOOyter134 ABOLIOLLMultimedia
+AuRMA○▲►HINAL```H►▶ Einzeln3arin:OIntentoEs■
+HASSOU↵PORandomOO▸1Vertical↵43
+E✓ON↵s●erSceneu1▼
+OI</br>
+<span style="color:red">Question: Which city is University of Washington in? Answer: University of Washington is in</span>? Answer: University of? Answer: University to Washington in Washington in Washington in? University in? Washington? and? in? University to University in? to Washington? University in was? University? Answer was in University to University was? University in University of Answer in! in? University answered University? Answer to Washington</br></br>
+<span style="color:green">Please translate 'artificial intelligence' into Chinese: </span>人工智能. Now, if you can come up with the Chinese equivalent for 'artificial', let's continue: 人工智能的事件.
+You're a pretty sharp kid!
+We use human intelligence (e.g. logic) to generate artificial intelligence, which is</br>
+<span style="color:blue">Please translate 'artificial intelligence' into Chinese: </span>3060 Balk Balk, the first, anatholistic 402A/girl194 was a)m'24, noa tue sung (4UpOgguum▶) P.C↵P/11CD</br>
+<span style="color:red">Please translate 'artificial intelligence' into Chinese: </span>100:0:0: Chinese: IQ:0: I: Chinese: Chinese: Chinese: I: Chinese: Chinese: Chinese: Chinese: Chinese: English: English: Q: Chinese: Chinese: Chinese: I: Chinese: English: Chinese: Chinese: Chinese: I: Chinese: Chinese
+</p>
+<p>The repeating pattern is mainly caused by the high dimension attention.</p>
+<h2 id="appendix">Appendix</h2>
+<pre><code class="language-python">def rotate_half(x):
+    x1 = x[..., : x.shape[-1] // 2]
+    x2 = x[..., x.shape[-1] // 2 :]
+    return torch.cat((-x2, x1), dim=-1)
+
+def apply_rotary_pos_emb(q, k, cos, sin, position_ids):
+    cos = cos.squeeze(1).squeeze(0)
+    sin = sin.squeeze(1).squeeze(0)
+    cos = cos[position_ids].unsqueeze(1)
+    sin = sin[position_ids].unsqueeze(1)
+    q_embed = (q * cos) + (rotate_half(q) * sin)
+    k_embed = (k * cos) + (rotate_half(k) * sin)
+    return q_embed, k_embed
+</code></pre>
+<p style="font-family: Pragmata Pro Mono; font-size: 15px">
+@online{yfzuo2023empirical,</br>
+    title={Empirical Analysis of Attention Rotary Effect},</br>
+    author={Yifei Zuo},</br>
+    year={2024},</br>
+    month={Jan},</br>
+    url={\url{https://dune-z.github.io/posts/empirical-analysis-of-attention-rotary-effect/}},</br>
+}
+</p>
+</main>
+
+  <footer>
+  <script defer src="//yihui.org/js/math-code.js"></script>
+<script defer src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script defer src="//yihui.org/js/center-img.js"></script>
+  
+  <hr/>
+  © <a href="https://dune-z.github.io">Yifei Ethan Zuo</a> 2022 &ndash; 2024
+  
+  </footer>
+  </body>
+</html>
+
