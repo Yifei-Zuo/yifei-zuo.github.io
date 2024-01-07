@@ -34,7 +34,7 @@ This is not a messy phenomenon related to the datasets but a systematic problem 
 I would like to investigate the this phenomenon deeper and identified the cause or implication of this positional inductive bias.</p>
 <p>We consider Transformer with RoPE (Rotary Positional Embedding), as the positional information is orthogonal to the content information, which makes it easier to analyze.
 Suppose that <code>$Q,K,V\in\mathbb C^{N\times D}$</code> and rotary phase <code>$\theta_d, d\in\{1,2,\dots,D\}$</code> is set as <code>$10000^{-d/D}$</code>. In practice, <code>$D$</code> is the dimension of a single head. <code>$N$</code> is the maximal training context length. The <code>$i^{\text{th}}$</code> hidden state in dimension <code>$d$</code> is denoted as <code>$H_{i,d}, H\in\{Q,K,V\}$</code>. We also use <code>$h_{d},h\in\{q,k,v\}$</code> to denote the <code>$d^{\text{th}}$</code> dimension of the hidden state if the position context is clear.</p>
-<p>The chosen of <code>$\theta_d$</code> is not arbitrary and this choice has been shown empirically to be performant in general. The attention mechanism of calculating the <code>$n$</code>th output hidden state is given by the following equations. In figure 1. we can see that the attention logits and hidden state are modulated by the rotary phase and attention map forms a wave pattern alone the anti-diagonal direction.</p>
+<p>The chosen of <code>$\theta_d$</code> is not arbitrary and this choice has been shown empirically performant in general. The attention mechanism of calculating the <code>$n$</code>th output hidden state is given by the following equations. In figure 1. we can see that the attention logits and hidden state are modulated by the rotary phase and attention map forms a wave pattern alone the anti-diagonal direction.</p>
 <p><code>$$ O_{n,p} = \frac{\sum_{m=1}^n \exp{\mathfrak{Re}\{\sum_d^D Q_{n,d}K_{m,d}e^{j\vert m-n\vert \theta_d}\}} V_{m,p}} {\sum_m^n \exp{\mathfrak{Re}\{\sum_d^D Q_{n,d}K_{m,d}e^{j\vert m-n\vert \theta_d}\}}} $$</code></p>
 <p>Achieving context length extrapolation was the primary design goal of RoPE. But it doesn&rsquo;t extrapolate well as we expected. One straightforward OOD factor is the rotation angle that goes behind the training range (It&rsquo;s weird that this paper and the post by RoPE author didn&rsquo;t consider it). But not all dimension failed to extrapolate since some of them were well rotated to a full circle during training.</p>
 <div style="text-align: center">
@@ -47,10 +47,12 @@ Suppose that <code>$Q,K,V\in\mathbb C^{N\times D}$</code> and rotary phase <code
 <p><code>$$ \theta_{m} = N\theta_d = 10000^{-d/64}\times 4096 \le 2\pi\text{, for }d\ge 46 $$</code></p>
 <p>We separate the dimension into two groups based on the rotation angle. We call it low dimension group if the rotation angle surpasses <code>$2\pi$</code> in training and high dimension group otherwise. In experiment, we use <code>$32$</code> dimension for both instead to make the distinction more clear.</p>
 <h4 id="1-numerical-property">1. Numerical Property</h4>
+<p>TODO</p>
 <div style="text-align: center">
 <img src="rotation_effect_logits.png" width="500px"></img>
 </div>
 <p style="text-align: center;line-height:0.9;font-variant:;font-size:14px; font-family: Optima; font-weight:bold; font-variant: small-caps">Figure 2. attention logits before & after rotation</p>
+<p><code>$$ \begin{aligned} \mathbb E[s_{n,m}] &amp;= \mathbb E[\sum_{d\in D_l} Q_{n,d}K_{m,d}e^{j\vert m-n\vert \theta_d}]\\ \end{aligned} $$</code></p>
 <div style="text-align: center">
 <img src="well.png" width="500px"></img>
 </div>
