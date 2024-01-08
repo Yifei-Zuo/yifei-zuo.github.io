@@ -13,7 +13,7 @@
       <link>/posts/empirical-analysis-of-attention-rotary-effect/</link>
       <pubDate>Wed, 03 Jan 2024 23:40:55 -0800</pubDate>
       <guid>/posts/empirical-analysis-of-attention-rotary-effect/</guid>
-      <description>Introduction In long context sequence modeling, Language models tend to forget in the middle. This is not a messy phenomenon related to the datasets but a systematic problem of the attention mechanism. It has been observed and leveraged in the acceleration of Transformer inference, as compressing the middle part of the sequence does not affect the performance much. But this is not a good thing to celebrate, as the model should be able to retrieve the middle part of the sequence according to the context, while they receive barely no attention from the model merely because of their position.</description>
+      <description>Introduction In long context sequence modeling, Language models tend to forget in the middle. This is a messy phenomenon related to the datasets and a systematic inductive-bias of the attention mechanism. It has been observed and leveraged in the acceleration of Transformer inference, as compressing the middle part of the sequence does not affect the performance much. But this is not a good thing to celebrate, as the model should be able to retrieve the middle part of the sequence according to the context, while they receive barely no attention from the model merely based on their position.</description>
     </item>
     <item>
       <title>Linear Time Sequence Modeling Annotation</title>
