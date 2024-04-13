@@ -9,13 +9,20 @@ body {
 /* header and footer areas */
 .menu { padding: 0; }
 .menu li { display: inline-block; }
-.article-meta, .menu a {
+.menu a {
+  text-decoration: none;
+  /* background: #eee; */
+  padding: 10px;
+  /* border-radius: 5px; */
+}
+.article-meta a {
   text-decoration: none;
   background: #eee;
   padding: 5px;
   border-radius: 5px;
 }
-.menu, .article-meta, footer { text-align: center; }
+.article-meta, footer { text-align: center; }
+.menu { text-align: left; }
 .title {
   font-family: 'Optima';
   font-size: 1em;
