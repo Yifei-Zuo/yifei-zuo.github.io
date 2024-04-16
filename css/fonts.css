@@ -15,13 +15,6 @@
 @font-face {
   font-family: 'Optima';
   src: local('Optima'), url('../fonts/Optima.ttc') format('truetype-collection');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Optima';
-  src: local('Optima'), url('../fonts/Optima.ttc') format('truetype-collection');
   font-weight: bold;
   font-style: normal;
 }
