@@ -12,11 +12,25 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Optima';
+  src: local('Optima'), url('../fonts/Optima.ttc') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pragmata Pro';
+  src: local('Pragmata Pro'), url('../fonts/Pragmata\ Pro\ Regular.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   font-family: "EB Garamond", Palatino, Optima, Candara, Calibri, Arial, sans-serif;
   font-size: 20px;
 }
 code {
-  font-family: "Pragmata Pro Mono", Monaco, monospace;
+  font-family: "Pragmata Pro", Monaco, monospace;
   font-size: 16px;
 }
