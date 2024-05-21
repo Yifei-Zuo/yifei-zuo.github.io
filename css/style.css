@@ -38,10 +38,14 @@ hr {
 
 /* code */
 pre {
-  border: 1px solid #ddd;
-  box-shadow: 5px 5px 5px #eee;
-  padding: 1em;
+  border: 1px solid #000000;
+  box-shadow: 5px 5px 5px #cacaca;
+  padding: 0.5em;
   overflow-x: auto;
+  margin-right: 100pt;
+  margin-left: 100pt;
+  line-height: 18px;
+  padding-bottom: 0px;
 }
 code { background: #f9f9f9; }
 pre code { background: none; }
@@ -51,9 +55,11 @@ img, iframe, video { max-width: 100%; }
 main {
   background-color: #ffffff;
   hyphens: auto;
-  padding: 1em; /* You might want some padding around your content */
-  border-radius: 2px; /* Optional: if you want rounded corners */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Optional: for a subtle shadow effect */
+  padding: 20px; /* You might want some padding around your content */
+  box-shadow: 10px 10px 10px rgba(0,0,0,0.2);
+  margin-left:20px;margin-right:20px;line-height:23px;
+  margin-top: 20px;
+  font-size: 20px;
 }
 
 blockquote {
@@ -80,6 +86,7 @@ h2, h3 {
   padding-bottom: 0.1px;  /* adds some space between the text and the line */
   margin-bottom: 0.1px;  /* adds some space after the line */
   font-variant: small-caps;
+  font-size: 1.3em;
 }
 
 h4, h5, h6 {
