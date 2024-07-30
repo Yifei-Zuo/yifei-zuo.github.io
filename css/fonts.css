@@ -26,9 +26,23 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Latin Modern Math';
+  src: local('Latin Modern Math'), url('../fonts/latin-modern-math.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Latin Modern Sans';
+  src: local('Latin Modern Sans'), url('../fonts/latin-modern-sans.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
-  font-family: "EB Garamond", Palatino, Optima, Candara, Calibri, Arial, sans-serif;
-  font-size: 20px;
+  font-family: 'Latin Modern Math', 'EB Garamond';
+  font-size: 18px;
 }
 code {
   font-family: "Pragmata Pro", Monaco, monospace;

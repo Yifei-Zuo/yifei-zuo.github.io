@@ -59,7 +59,7 @@ main {
   box-shadow: 10px 10px 10px rgba(0,0,0,0.2);
   margin-left:20px;margin-right:20px;line-height:23px;
   margin-top: 20px;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 blockquote {
@@ -86,7 +86,7 @@ h2, h3 {
   padding-bottom: 0.1px;  /* adds some space between the text and the line */
   margin-bottom: 0.1px;  /* adds some space after the line */
   font-variant: small-caps;
-  font-size: 1.3em;
+  font-size: 1.4em;
 }
 
 h4, h5, h6 {
