@@ -40,11 +40,18 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Latin Modern Mono';
+  src: local('Latin Modern Mono'), url('../fonts/latin-modern-mono.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   font-family: 'Latin Modern Math', 'EB Garamond';
   font-size: 18px;
 }
 code {
-  font-family: "Latin Modern Sans", "Pragmata Pro", monospace;
+  font-family: "Latin Modern Mono", "Latin Modern Sans", "Pragmata Pro", monospace;
   font-size: 16px;
 }
