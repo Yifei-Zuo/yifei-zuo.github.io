@@ -40,7 +40,7 @@
 </blockquote>
 <h2 id="">LLM Reasoning as Probabilistic Inference</h2>
 A fundamental challenge in reasoning lies in how an LLM arrives at an answer. Unlike simple text generation, reasoning requires structured thought processes that lead to verifiable correctness. To make this process explicit, we can represent reasoning as a probabilistic graphical model, where the reasoning process involves inferring with latent variables.
-<div style="height: 0.5em;"></div>
+<div style="height: 0.2em;"></div>
 <h4 id="">Formulation</h4>
 Given a prompt \(x\), an LLM does not directly output the final answer \(y\). Instead, the reasoning process involves an intermediate latent variable \(z\) (which represents the thought process).
 To ensure the reasoning steps are valid, an evaluation signal \(o\) is introduced, reflecting the correctness of the reasoning chain and final answer.
@@ -94,7 +94,7 @@ This EM-like process bootstraps the reasoning ability of the LLM and under certa
 A major challenge remains: sampling from the intractable posterior.
 To address this, we reinterpret the LLM generation as a Markov Decision Process (MDP) with entropy-regularized value function.
 This formulation is crucial for deriving a practical implementation of the EM algorithm.
-<div style="height: 0.5em;"></div>
+<div style="height: 0.2em;"></div>
 <h4 id="">MDP Formulation</h4>
 The generation process of a language model is treated as a token-level MDP, where
 <ol type="i" style="margin-top: 0.3em;margin-bottom: 0.3em;">
