@@ -64,7 +64,6 @@ main {
 
 blockquote {
   background: #f9f9f9;
-  border-left: 5px solid #f9f9f9;
   padding: 3px 1em 3px;
   border-radius: 8px; /* Optional: if you want rounded corners */
 }
@@ -83,8 +82,8 @@ h2, h3 {
   font-family: 'Optima';
   text-align: left;
   border-bottom: 2px solid #000;  /* adjust the color and thickness as desired */
-  padding-bottom: 0.1px;  /* adds some space between the text and the line */
-  margin-bottom: 0.1px;  /* adds some space after the line */
+  padding-bottom: 0px;  /* adds some space between the text and the line */
+  margin-bottom: 4px;  /* adds some space after the line */
   font-variant: small-caps;
   font-size: 1.4em;
 }
@@ -92,12 +91,14 @@ h2, h3 {
 h4, h5, h6 {
     font-family: 'Optima';
     text-align: left;
-    padding-bottom: 0.1px;
-    margin-bottom: 0.1px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    margin-top: 0px;
     font-variant: small-caps;
     position: relative; /* Needed for absolute positioning of the pseudo-element */
     display: inline-block;
     width: auto;
+    font-size: 1em;
   }
 
   h4:after, h5:after, h6:after {

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Posts | Yifei Zuo</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+  </head>
+  <head>
+    <meta charset="utf-8">
+    <style>
+        .custom-link {
+            color: black; /* Default text color */
+            text-decoration: underline; /* Removes underline */
+        }
+        .custom-link:hover {
+            color: white; /* Text color on hover (could be different if desired) */
+            background-color: black; /* Background color on hover */
+        }
+    </style>
+  </head>
+  <body>
+
+<main>
+<span style="font-weight:bold;font-size:28px">From Probabilistic Graphical Models to DeepSeek-R1</span>
+<span style="float: right; font-weight: normal; font-family: Latin Modern Mono; font-size: 18px"><a href="/posts/" class="custom-link">Back</a></span></br>
+<!-- <span style="font-weight:bold;font-size:18px">Yifei Zuo, Yuanxin Liu, Zhihan Liu</span> -->
+<span style="font-weight:bold;font-size:18px">Author</span>
+<blockquote>
+  <p>
+    In this blog, we present a framework that explains the success of DeepSeek-R1 by formalizing LLM reasoning as probabilistic inference.
+    This perspective naturally leads to an Expectation-Maximization (EM) algorithm, where reasoning steps are optimized via posterior estimation.
+    By further reinterpreting the generation process as an entropy-regularized MDP to effectively solve the sampling problem, we derive a closed-form optimal policy aligned with RLHF objectives.
+    This formulation provides a principled framework for improving LLM reasoning at scale.
+    <br><br>
+    <code style="font-weight: bold;">Date</code>: <br>
+    <code style="font-weight: bold;">Papar</code>: <br>
+  </p>
+</blockquote>
+<h2 id="">LLM Reasoning as Probabilistic Inference</h2>
+A fundamental challenge in reasoning lies in how an LLM arrives at an answer. Unlike simple text generation, reasoning requires structured thought processes that lead to verifiable correctness. To make this process explicit, we can represent reasoning as a probabilistic graphical model, where the reasoning process involves inferring with latent variables.
+<div style="height: 0.5em;"></div>
+<h4 id="">Formulation</h4>
+Given a prompt \(x\), an LLM does not directly output the final answer \(y\). Instead, the reasoning process involves an intermediate latent variable \(z\) (which represents the thought process).
+To ensure the reasoning steps are valid, an evaluation signal \(o\) is introduced, reflecting the correctness of the reasoning chain and final answer.
+<div style="height: 0em;"></div>
+Suppose the model is parameterized by \(\theta\) and the evaluation signal is independent of the model. Then we decompose the probability of generating a reasoning path and an answer as follows:
+$$
+\mathbb P\big(z, y, o \mid x, \theta\big) = \underbrace{\mathbb P\big(y \mid z, x, \theta\big)\times \mathbb P\big(z \mid x, \theta\big)}_{\text{language model generation}}\times \underbrace{\mathbb P\big(o \mid x, z, y\big)}_{\text{evaluation signal}}
+$$
+We are specifically interested in generating responses with desired evaluation signals. For example, a math verifier evaluates the question-answer pair \(x,y\) and provides binary feedback \(o\in \{0,1\}\)
+<span style="color: brown;">TODO: example of math/code and state the necessity of viewing \(o\) as a random variable.</span>
+<span style="color: brown;">TODO: introduce exp form here and reintroduce it in later section</span>
+
+<div style="height: 0em;"></div>
+<h4 id="">Reformulating Learning Objective</h4>
+Given this probabilistic formulation, a direct learning objective would be to maximize the probability of correct reasoning steps:
+$$
+\max_{\theta} \mathcal L(\theta) := \log \mathbb P\big(o\in\mathcal O, z\in\mathcal Z, y\in\mathcal Y  \mid x, \theta\big) = \log \sum_{(z, y) \in \mathcal{Z} \times \mathcal{Y}} \mathbb P\big(z, y, o\in\mathcal O \mid x, \theta\big)
+$$
+However, directly optimizing this objective is computationally intractable due to the complexity of marginalizing over latent variables. <span style="color: brown;">TODO: why using sft to directly optimize is intractable -> design natural space</span>
+Instead, we turn to variational inference and optimize the Evidence Lower Bound (ELBO), which provides a more efficient optimization target.
+$$
+\mathcal L(\theta) = \max_{\mathbb Q\in\Delta(\mathcal O\times \mathcal Z\times \mathcal Y)}\underbrace{\mathbb E_{\mathbb Q(z, y, o \mid x, \psi)}\Big[\log \frac{\mathbb P\big(z, y, o \mid x, \theta\big)}{\mathbb Q(z, y, o \mid x, \psi)}\Big]}_{\text{denote as }\mathcal L_\psi(\theta)}
+$$
+Here \(\mathbb Q(z, y, o \mid x, \psi)\) serves as an auxiliary distribution, allowing us to approximate the true posterior and make the learning process more tractable.
+In practice, \(\mathbb Q\) can be interpreted as a separate language model that functions as a sampler, generating plausible reasoning chains that align with the target posterior distribution.
+$$
+\mathbb Q^*(z, y, o \mid x, \psi) = \mathrm{argmax}\mathcal L_\psi(\theta) = \frac{\mathbb P(z,y,o\mid x,\theta)}{\sum_{(z,y,o)\in\mathcal Z\times\mathcal Y\times \mathcal O} \mathbb P(z,y,o\mid x,\theta)}
+$$
+<div style="height: 0em;"></div>
+To achieve this, we need to train \(\mathbb Q\) to produce high-quality latent reasoning paths.
+This naturally leads us to the next section, where we frame the reasoning process as an entropy-regularized Markov Decision Process (MDP) and leverage reinforcement learning (RL)-based inference to efficiently optimize the sampling distribution.
+<div style="height: 0.5em;"></div>
+But before entering the next section, let's first introduce the Expectation-Maximization (EM) algorithm that arises from our formulation. The EM framework provides a structured way to optimize our objective by alternating between estimating the latent reasoning process and updating the model parameters.
+<!-- <blockquote style="background-color: #eafaf1"> -->
+<blockquote style="background-color: #fbeee6">
+  <p>
+    <b>E-step</b>: Estimate the latent reasoning distribution by setting \(\mathbb Q\) to approximate the posterior.
+    $$
+    \mathbb Q(z, y, o \mid x, \psi_{t+1}) = \mathrm{argmax}_{\mathbb Q} \mathcal L_{\psi}(\theta_{t})
+    $$
+    <b>M-step</b>: Optimize the parameters \(\theta\) by maximizing the likelihood under the distribution \(\mathbb Q\).
+    $$
+    \theta_{t+1} = \mathrm{argmax}_{\theta} \mathbb E_{\mathbb Q(\cdot,\cdot,\cdot \mid x, \psi_{t+1})}\Big[\log \mathbb P\big(z, y \mid x, \theta\big)\Big]
+    $$
+  </p>
+</blockquote>
+<span style="color: brown;">TODO: m-step explanation</span>
+Note that we can taking out the evaluation signal \(o\) in the \(\mathbb P\) term in the M-step.
+This EM-like process bootstraps the reasoning ability of the LLM and under certain conditions converges to a local optimum.
+<h2 id="">Reinforcement Learning: Learn to Sample</h2>
+A major challenge remains: sampling from the intractable posterior.
+To address this, we reinterpret the LLM generation as a Markov Decision Process (MDP) with entropy-regularized value function.
+This formulation is crucial for deriving a practical implementation of the EM algorithm.
+<div style="height: 0.5em;"></div>
+<h4 id="">MDP Formulation</h4>
+The generation process of a language model is treated as a token-level MDP, where
+<ol type="i" style="margin-top: 0.3em;margin-bottom: 0.3em;">
+    <li>State \(s_h\): The current partial sequence generated by the model. </li>
+    <li>Action \(a_h\): corresponses to the next token to be generated. </li>
+    <li>Transition: The language model itself determines state transitions, which are deterministic due to the autoregressive nature of LLMs. </li>
+    <li>Reward \(R(s,a)\): A function that evaluates the quality of a generated reasoning step, which we will define later.</li>
+</ol>
+An entropy-regularized MDP seeks to maximize the expected reward while maintaining a relatively high entropy in the action distribution to encourage exploration.
+Mathematically, the objective can be formulated as:
+$$
+\max_{\pi} \mathbb{E}_{\pi} \left[ \sum_{h=1}^H \Big( R_h(s_h, a_h) - \log\pi(a_h \mid s_h) \Big) \right]
+$$
+A key insight from modeling LLM generation process in this MDP formulation is that under the deterministic transition conditions, the optimal policy has a closed-form solution:
+$$
+\pi^*(a_h \cup  \{(s_i, a_i)\}_{i=h+1}^H \mid s_h) = \prod_{i = h}^H \pi^*(a_i \mid s_i) \propto \exp\Big(\sum_{i = h}^H R(s_i, a_i) \Big)
+$$
+
+<h4 id="">Derive RL Objective</h4>
+To connect this MDP framework to our original objective, we define the reward function as the log-likelihood of the reasoning path.
+<span style="color: brown;">TODO: token-level decomposition.</span>
+$$
+\exp\Big(\sum_{i = 1}^H R(s_i, a_i) \Big) \propto \mathbb P(z, y, o=1 \mid x, \theta)
+$$
+Bringing back our assumption on the external evaluation signal, we expand the probability:
+$$
+\mathbb P(z, y, o=1 \mid x, \theta) = \mathbb P(z, y \mid x, \theta) \mathbb P(o=1 \mid x, z, y) = \mathbb P(z, y \mid x, \theta) \exp\Big(\frac{r(x, y)}{\beta}\Big)
+$$
+By substituting this into our reward function, the MDP objective simplifies to:
+$$
+\max_{\pi} \mathbb{E}_{\pi} \left[ \frac{r(x, y)}{\beta}\right] - \mathbb D_{KL}\Big(\pi(\cdot\mid x) \parallel \mathbb \pi_{\text{ref}}(\cdot\mid x)\Big)
+$$
+Here we denote the starting point \(\mathbb P\) as the reference model \(\pi_{\text{ref}}\).
+This is exactly the objective of the Reinforcement Learning with Human Feedback (RLHF), and we can leverage existing RL algorithms to optimize the sampling distribution.
+<h2 id="">DeepSeek-R1: An EM + RL Solution</h2>
+DeepSeek-R1 represents a significant step toward automating the generation of structured reasoning processes.
+<span style="color: brown;">TODO: why end point can be e-step</span>
+<h2 id="">Further Implication</h2>
+<h2 id="">References</h2>
+<footer>
+<script defer src="//yihui.org/js/math-code.js"></script>
+<script defer src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script defer src="//yihui.org/js/center-img.js"></script>
+  <hr/>
+    © <span style="font-family: Latin Modern Mono;">[yifeizuo2029@u.northwestern.edu]</span>
+  </footer>
+  </body>
+</html>
