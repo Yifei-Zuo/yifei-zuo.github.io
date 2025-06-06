@@ -52,7 +52,13 @@
             color: white;
             background-color: #B22222;
         }
-
+        li {
+            list-style-position: outside; /* Bullet is outside the content box */
+        }
+        li::marker {
+            font-size: 1em; /* Optional: change bullet size */
+            margin-right: 1em;
+        }
     </style>
   </head>
 
@@ -87,7 +93,8 @@ I received my B.E. with honors in AI from the <a href="https://en.ustc.edu.cn/" 
 <div style="padding-left: 1em; font-size: 0.95em;line-height: 1.2em;">
   Han Zhong*, Yutong Yin*, Shenao Zhang*, Xiaojun Xu*, Yuanxin Liu*, <span style="font-weight: bold;">Yifei Zuo*</span>, Zhihan Liu*, Boyi Liu, Sirui Zheng, Hongyi Guo, Liwei Wang, Mingyi Hong, Zhaoran Wang
 </div> -->
-<li>
+<div>
+  -
 <a href="javascript:void(0)" class="custom-link" style="text-decoration: none;">
     BRiTE: Bootstrapping Reinforced Thinking Process to Enhance Language Model Reasoning
 </a>
@@ -102,7 +109,7 @@ I received my B.E. with honors in AI from the <a href="https://en.ustc.edu.cn/" 
     <span style="font-weight: bold;">Yifei Zuo*</span>, Zhihan Liu*, Boyi Liu, Sirui Zheng, 
     Hongyi Guo, Liwei Wang, Mingyi Hong, Zhaoran Wang
 </div>
-</li>
+</div>
 
 </main>
 
