@@ -10,3 +10,9 @@
 - Finalized the current stage by keeping the restored original layout.
 - Preserved only the warm paper main background as the approved visual change.
 - Screenshots were used to confirm that the added top gradient should not remain.
+
+## 2026-03-24 · Research topic links
+- Updated the homepage research line to use the shared scope: large language model architectures and post-training.
+- Linked both topics to /projects/ using the existing hover style.
+- Added monospace styling to those topic links so they match the other interactive labels.
+- Validated the wording and styling through refreshed desktop and mobile screenshots.
