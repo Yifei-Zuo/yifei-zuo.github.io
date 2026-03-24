@@ -6,6 +6,77 @@ body {
   line-height: 1.3;
 }
 
+.custom-link {
+  color: black;
+  text-decoration: underline;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.custom-link:hover,
+.custom-link.is-active {
+  color: white;
+  background-color: black;
+}
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.site-header__brand {
+  font-weight: bold;
+  font-size: 28px;
+  font-family: "EB Garamond";
+}
+
+.site-header__nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.65rem;
+  font-weight: normal;
+  font-family: "Latin Modern Mono";
+  font-size: 18px;
+}
+
+.site-footer__email {
+  font-family: "Latin Modern Mono";
+}
+
+.home-content li {
+  list-style-position: outside;
+}
+
+.home-content li::marker {
+  font-size: 1em;
+  margin-right: 1em;
+}
+
+.northwestern-link {
+  color: #4E2A84;
+  text-decoration: none;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.northwestern-link:hover {
+  color: white;
+  background-color: #4E2A84;
+}
+
+.arxiv-link {
+  color: #B22222;
+  text-decoration: underline;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.arxiv-link:hover {
+  color: white;
+  background-color: #B22222;
+}
+
 /* header and footer areas */
 .menu { padding: 0; }
 .menu li { display: inline-block; }

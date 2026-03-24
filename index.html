@@ -15,15 +15,6 @@
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <style>
-        .custom-link {
-            color: black; /* Default text color */
-            text-decoration: underline; /* Removes underline */
-            transition: color 0.3s ease, background-color 0.3s ease;
-        }
-        .custom-link:hover {
-            color: white; /* Text color on hover (could be different if desired) */
-            background-color: black; /* Background color on hover */
-        }
         .material-link {
             color:blue;
             text-decoration:underline;
@@ -33,40 +24,12 @@
             color:white;
             background-color:blue;
         }
-        .northwestern-link {
-            color: #4E2A84;
-            text-decoration: none;
-            transition: color 0.3s ease, background-color 0.3s ease;
-        }
-        .northwestern-link:hover {
-            color: white;
-            background-color: #4E2A84;
-        }
-        .arxiv-link {
-            color: #B22222;
-            text-decoration: underline;
-            transition: color 0.3s ease, background-color 0.3s ease;
-        }
-
-        .arxiv-link:hover {
-            color: white;
-            background-color: #B22222;
-        }
-        li {
-            list-style-position: outside; /* Bullet is outside the content box */
-        }
-        li::marker {
-            font-size: 1em; /* Optional: change bullet size */
-            margin-right: 1em;
-        }
     </style>
   </head>
 
-
-
-<main style="font-size: 18px;">
-<span style="font-weight:bold; font-size:28px; font-family: EB Garamond;">Yifei Zuo</span>
-<span style="float: right; font-weight: normal; font-family: Latin Modern Mono; font-size: 18px"><a href="/" class="custom-link">About</a> <a href="/posts/" class="custom-link" style="text-decoration: none;">Posts</a> <a href="https://scholar.google.com/citations?user=fWUxfTEAAAAJ&hl=en&oi=ao"  class="custom-link" style="text-decoration: none;">Papers</a></span></br>
+<body data-page="about">
+<main class="home-content" style="font-size: 18px;">
+<div id="site-header"></div>
 
 
 <h2>Research</h2>
@@ -116,14 +79,8 @@ I received my B.E. with honors in AI from the <a href="https://en.ustc.edu.cn/" 
 <ul>
 </ul>
 
-<footer>
-    <script defer src="//yihui.org/js/math-code.js"></script>
-    <script defer src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-    <script defer src="//yihui.org/js/center-img.js"></script>
-    <hr/>
-    © <span style="font-family: Latin Modern Mono;">[yifeizuo2029@u.northwestern.edu]</span>
-</footer>
+<footer id="site-footer"></footer>
+<script defer src="/js/site.js"></script>
 </body>
 </html>
 
