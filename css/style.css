@@ -124,7 +124,7 @@ pre code { background: none; }
 /* misc elements */
 img, iframe, video { max-width: 100%; }
 main {
-  background-color: #ffffff;
+  background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.18)), #f7f3ec;
   hyphens: auto;
   padding: 20px; /* You might want some padding around your content */
   box-shadow: 10px 10px 10px rgba(0,0,0,0.2);
