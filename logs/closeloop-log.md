@@ -33,3 +33,8 @@
 - Increased the emphasis of the homepage research topic links by making `architectures` and `post-training` bold within the existing monospace topic treatment.
 - Kept the change scoped to the shared topic-link style so the wording and hover behavior remain unchanged.
 - Validated the stronger emphasis through refreshed desktop and mobile screenshots.
+
+## 2026-03-31 · Cache-busted assets and canonical URL cleanup
+- Added versioned query strings to the shared CSS and JS asset URLs so deployed browsers fetch fresh files after visual changes instead of reusing stale cached assets.
+- Updated the site metadata and feed references from `https://dune-z.github.io/` to `https://yifei-zuo.github.io/`.
+- Kept the rendered layout unchanged while validating the site again through refreshed screenshots.
