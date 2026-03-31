@@ -22,3 +22,9 @@
 - Added explicit pointer and focus-driven interactive states for shared link styles so the color inversion appears as soon as the cursor enters the link.
 - Preserved the existing visual language for default, active, and brand-colored link treatments.
 - Validated the fix through refreshed screenshots and a browser interaction check.
+
+## 2026-03-31 · Moving link highlighter
+- Replaced per-link hover fills with one shared animated highlight block that moves between links, resizes to the target label, and transitions color for black and Northwestern purple states.
+- Removed the resting highlight fallback so no link shows a block when the cursor is not hovering or focusing a link.
+- Corrected the text inversion logic so only the currently highlighted link turns white while the others remain in their default color.
+- Validated the interaction through refreshed screenshots plus hover-state captures for rest, active hover, and cleared states.
