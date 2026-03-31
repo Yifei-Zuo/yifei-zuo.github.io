@@ -28,3 +28,8 @@
 - Removed the resting highlight fallback so no link shows a block when the cursor is not hovering or focusing a link.
 - Corrected the text inversion logic so only the currently highlighted link turns white while the others remain in their default color.
 - Validated the interaction through refreshed screenshots plus hover-state captures for rest, active hover, and cleared states.
+
+## 2026-03-31 · Topic link emphasis
+- Increased the emphasis of the homepage research topic links by making `architectures` and `post-training` bold within the existing monospace topic treatment.
+- Kept the change scoped to the shared topic-link style so the wording and hover behavior remain unchanged.
+- Validated the stronger emphasis through refreshed desktop and mobile screenshots.
