@@ -16,3 +16,9 @@
 - Linked both topics to /projects/ using the existing hover style.
 - Added monospace styling to those topic links so they match the other interactive labels.
 - Validated the wording and styling through refreshed desktop and mobile screenshots.
+
+## 2026-03-31 · Link hover activation
+- Fixed the link highlight bug where the colored hover box did not reliably appear until after a click on the deployed site.
+- Added explicit pointer and focus-driven interactive states for shared link styles so the color inversion appears as soon as the cursor enters the link.
+- Preserved the existing visual language for default, active, and brand-colored link treatments.
+- Validated the fix through refreshed screenshots and a browser interaction check.

@@ -13,6 +13,8 @@ body {
 }
 
 .custom-link:hover,
+.custom-link.is-hovered,
+.custom-link:focus-visible,
 .custom-link.is-active {
   color: white;
   background-color: black;
@@ -66,7 +68,9 @@ body {
   transition: color 0.3s ease, background-color 0.3s ease;
 }
 
-.northwestern-link:hover {
+.northwestern-link:hover,
+.northwestern-link.is-hovered,
+.northwestern-link:focus-visible {
   color: white;
   background-color: #4E2A84;
 }
@@ -77,7 +81,9 @@ body {
   transition: color 0.3s ease, background-color 0.3s ease;
 }
 
-.arxiv-link:hover {
+.arxiv-link:hover,
+.arxiv-link.is-hovered,
+.arxiv-link:focus-visible {
   color: white;
   background-color: #B22222;
 }

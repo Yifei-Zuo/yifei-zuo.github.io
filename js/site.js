@@ -64,6 +64,48 @@
     });
   }
 
+  function bindInteractiveLinkStates() {
+    var selector = '.custom-link, .northwestern-link, .arxiv-link, .material-link';
+
+    document.addEventListener('pointerover', function (event) {
+      var link = event.target.closest(selector);
+      if (!link) {
+        return;
+      }
+      link.classList.add('is-hovered');
+    });
+
+    document.addEventListener('pointerout', function (event) {
+      var link = event.target.closest(selector);
+      if (!link) {
+        return;
+      }
+
+      var relatedTarget = event.relatedTarget;
+      if (relatedTarget && link.contains(relatedTarget)) {
+        return;
+      }
+
+      link.classList.remove('is-hovered');
+    });
+
+    document.addEventListener('focusin', function (event) {
+      var link = event.target.closest(selector);
+      if (!link) {
+        return;
+      }
+      link.classList.add('is-hovered');
+    });
+
+    document.addEventListener('focusout', function (event) {
+      var link = event.target.closest(selector);
+      if (!link) {
+        return;
+      }
+      link.classList.remove('is-hovered');
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     var pageKey = document.body.dataset.page || '';
     var header = document.getElementById('site-header');
@@ -78,5 +120,6 @@
     }
 
     appendSharedScripts();
+    bindInteractiveLinkStates();
   });
 })();
