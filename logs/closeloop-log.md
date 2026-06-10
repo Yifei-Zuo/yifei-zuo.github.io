@@ -43,3 +43,9 @@
 - Removed the `Projects` item from the shared header navigation while preserving existing `/projects/` page links in body content.
 - Bumped the shared CSS and JS asset query strings so the deployed site fetches the updated menu script.
 - Validated the header through refreshed desktop and mobile screenshots plus a DOM check showing `About`, `Scholar`, and `GitHub`.
+
+## 2026-06-09 · Add X profile to menu
+- Added an external `𝕏` menu item linking to `https://x.com/YifeiZuoX`.
+- Added accessible labeling for the symbol-only link through `aria-label` and `title`.
+- Bumped the shared CSS and JS asset query strings so the deployed site fetches the updated menu script.
+- Validated the header through refreshed desktop and mobile screenshots plus a DOM check for the X link target.

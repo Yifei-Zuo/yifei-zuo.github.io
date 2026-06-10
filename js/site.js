@@ -8,7 +8,8 @@
   var navItems = [
     { href: '/', label: 'About', key: 'about' },
     { href: site.scholarUrl, label: 'Scholar', key: 'scholar', external: true },
-    { href: 'https://github.com/Yifei-Zuo', label: 'GitHub', key: 'github', external: true }
+    { href: 'https://github.com/Yifei-Zuo', label: 'GitHub', key: 'github', external: true },
+    { href: 'https://x.com/YifeiZuoX', label: '𝕏', key: 'x', external: true, ariaLabel: 'X' }
   ];
 
   function escapeHtml(value) {
@@ -27,6 +28,9 @@
         classes.push('is-active');
       }
       var attrs = item.external ? ' target="_blank" rel="noopener noreferrer"' : '';
+      if (item.ariaLabel) {
+        attrs += ' aria-label="' + escapeHtml(item.ariaLabel) + '" title="' + escapeHtml(item.ariaLabel) + '"';
+      }
       return '<a href="' + item.href + '" class="' + classes.join(' ') + '"' + attrs + '>' + item.label + '</a>';
     }).join(' ');
 
