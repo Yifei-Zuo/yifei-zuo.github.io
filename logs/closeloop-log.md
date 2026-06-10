@@ -38,3 +38,8 @@
 - Added versioned query strings to the shared CSS and JS asset URLs so deployed browsers fetch fresh files after visual changes instead of reusing stale cached assets.
 - Updated the site metadata and feed references from `https://dune-z.github.io/` to `https://yifei-zuo.github.io/`.
 - Kept the rendered layout unchanged while validating the site again through refreshed screenshots.
+
+## 2026-06-09 · Remove Projects from menu
+- Removed the `Projects` item from the shared header navigation while preserving existing `/projects/` page links in body content.
+- Bumped the shared CSS and JS asset query strings so the deployed site fetches the updated menu script.
+- Validated the header through refreshed desktop and mobile screenshots plus a DOM check showing `About`, `Scholar`, and `GitHub`.

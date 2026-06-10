@@ -7,7 +7,6 @@
 
   var navItems = [
     { href: '/', label: 'About', key: 'about' },
-    { href: '/projects/', label: 'Projects', key: 'projects' },
     { href: site.scholarUrl, label: 'Scholar', key: 'scholar', external: true },
     { href: 'https://github.com/Yifei-Zuo', label: 'GitHub', key: 'github', external: true }
   ];
