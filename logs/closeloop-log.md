@@ -49,3 +49,8 @@
 - Added accessible labeling for the symbol-only link through `aria-label` and `title`.
 - Bumped the shared CSS and JS asset query strings so the deployed site fetches the updated menu script.
 - Validated the header through refreshed desktop and mobile screenshots plus a DOM check for the X link target.
+
+## 2026-10-28 - Advisor Google Scholar link
+- Replaced Zhaoran Wang's personal-page URL with his Google Scholar profile (`HSx0BgQAAAAJ`).
+- Confirmed the profile ID from independent listings and checked the HTML diff; Google Scholar blocked automated page access.
+- Only the link destination changed; no visual styling or text changed.
