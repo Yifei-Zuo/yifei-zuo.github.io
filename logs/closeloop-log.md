@@ -54,3 +54,8 @@
 - Replaced Zhaoran Wang's personal-page URL with his Google Scholar profile (`HSx0BgQAAAAJ`).
 - Confirmed the profile ID from independent listings and checked the HTML diff; Google Scholar blocked automated page access.
 - Only the link destination changed; no visual styling or text changed.
+
+## 2026-11-04 - Agent RSI research update
+- Added "I've recently been developing an agent RSI system for complex research." as the first sentence in the Research section.
+- Kept the approved RSI abbreviation and existing body typography.
+- Validated the placement and line wrapping through refreshed desktop and mobile screenshots.
